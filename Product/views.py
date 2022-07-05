@@ -35,7 +35,7 @@ class CreateCheckoutSessionView(View):
     def post(self, request, *args, **kwargs):
         product_id = self.kwargs["pk"]
         product = Product.objects.get(id=product_id)
-        YOUR_DOMAIN = 'http://127.0.0.1:8000'
+        YOUR_DOMAIN = 'https://djstripe.herokuapp.com'
         checkout_session = stripe.checkout.Session.create(
             payment_method_types=['card'],
             line_items=[
@@ -45,7 +45,7 @@ class CreateCheckoutSessionView(View):
                         'unit_amount': int(product.price)*100,
                         'product_data': {
                             'name': product.name,
-                            'images': ['http://127.0.0.1:8000/image/13.jpg'],
+                            'images': ['https://scontent.fjsr11-1.fna.fbcdn.net/v/t1.6435-9/142422872_1125949994484381_3281419797722937871_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeF_DNIx0E-Fsl_36eEUV_gIyR7AUimx8znJHsBSKbHzOYKq2tZTZdQ57Zf5-3YvoQHM4Luv3zn4v33hHKaN2vFL&_nc_ohc=3U3VZIVo4A4AX9cHfoN&_nc_ht=scontent.fjsr11-1.fna&oh=00_AT_cvQAI3JHM2AVlqqDDm0hWZ01IB-ADEIKcCvJ-r2CD0w&oe=62E74F83'],
                         },
                     },
                     'quantity': 1,
